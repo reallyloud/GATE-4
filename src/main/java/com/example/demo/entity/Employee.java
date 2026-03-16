@@ -1,30 +1,27 @@
 package com.example.demo.entity;
 
-
 import jakarta.persistence.*;
-import lombok.*;
-
 import java.math.BigDecimal;
 import java.util.UUID;
+import lombok.*;
 
 @Data
 @Entity
-@Table(name="employees")
+@Table(name = "employees")
 @AllArgsConstructor
 @NoArgsConstructor
 public class Employee {
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.UUID)
+  private UUID id;
 
-    @Column(nullable = false)
-    private String name;
+  @Column(nullable = false)
+  private String name;
 
-    @Column(nullable = false)
-    private BigDecimal salary;
+  @Column(nullable = false)
+  private BigDecimal salary;
 
-    @Version
-    @Setter(AccessLevel.NONE)
-    private Long version;
-
+  @Version
+  @Setter(AccessLevel.NONE)
+  private Long version;
 }

@@ -10,12 +10,11 @@ import org.mapstruct.MappingTarget;
 @Mapper
 public interface EmployeeMapper {
 
-    @Mapping(target = "id", ignore = true)
-    Employee toEntity(RequestEmployee requestEmployee);
+  @Mapping(target = "id", ignore = true)
+  Employee toEntity(RequestEmployee requestEmployee);
 
-    ResponseEmployee toResponse(Employee employee);
+  ResponseEmployee toResponse(Employee employee);
 
-    @Mapping(target = "id", ignore = true)
-    void updateEmployee(@MappingTarget Employee employee, RequestEmployee requestEmployee);
-
+  @Mapping(target = "id", ignore = true)
+  void updateEmployee(@MappingTarget Employee employee, RequestEmployee requestEmployee);
 }

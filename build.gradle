@@ -2,6 +2,7 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '4.0.3'
 	id 'io.spring.dependency-management' version '1.1.7'
+    id 'com.diffplug.spotless' version '7.2.1'
 }
 
 group = 'com.example'
@@ -28,8 +29,17 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    //Tests
+    testImplementation 'org.assertj:assertj-core'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    testRuntimeOnly "com.h2database:h2:2.3.232"
+    testImplementation 'org.springframework.boot:spring-boot-starter-data-jpa-test'
+    testImplementation 'org.assertj:assertj-core'
+
+
+
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
@@ -50,6 +60,16 @@ tasks.withType(JavaCompile) {
     ]
 }
 
+spotless {
+    java {
+        target 'src/**/*.java'
+        targetExclude 'build/**'
+        googleJavaFormat('1.33.0')
+        removeUnusedImports()
+        trimTrailingWhitespace()
+        endWithNewline()
+    }
+}
 
 tasks.named('test') {
 	useJUnitPlatform()
