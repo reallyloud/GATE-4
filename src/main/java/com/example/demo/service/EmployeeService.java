@@ -5,6 +5,8 @@ import com.example.demo.dto.ResponseEmployee;
 import com.example.demo.entity.Employee;
 import com.example.demo.mapper.EmployeeMapper;
 import com.example.demo.repository.EmployeeRepository;
+
+import java.util.List;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,6 +24,17 @@ public class EmployeeService {
     Employee employee = mapper.toEntity(request);
     employee = repository.save(employee);
     return mapper.toResponse(employee);
+  }
+
+  @Transactional
+  public List<ResponseEmployee> findAll() {
+    List<Employee> employees = repository.findAll();
+    if (employees.isEmpty()) {
+      return null;
+    }
+    return employees.stream()
+            .map(mapper::toResponse)
+            .toList();
   }
 
   @Transactional

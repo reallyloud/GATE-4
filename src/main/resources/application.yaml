@@ -18,3 +18,17 @@ spring:
     change-log: classpath:db/changelog/db.changelog-master.yaml
     enabled: true
     drop-first: false
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: docker
+
+  datasource:
+    url: jdbc:postgresql://host.docker.internal:5432/employeeCrm
+    username: postgres
+    password: 6881
+    driver-class-name: org.postgresql.Driver
+

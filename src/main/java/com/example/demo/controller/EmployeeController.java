@@ -4,8 +4,11 @@ import com.example.demo.dto.RequestEmployee;
 import com.example.demo.dto.ResponseEmployee;
 import com.example.demo.service.EmployeeService;
 import jakarta.validation.Valid;
+
+import java.util.List;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +23,12 @@ public class EmployeeController {
       @Valid @RequestBody RequestEmployee requestEmployee) {
     ResponseEmployee response = service.createEmployee(requestEmployee);
     return ResponseEntity.status(201).body(response);
+  }
+
+  @GetMapping()
+  @ResponseStatus(HttpStatus.OK)
+  public List<ResponseEmployee> findAll() {
+    return service.findAll();
   }
 
   @GetMapping("/{id}")
