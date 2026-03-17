@@ -1,10 +1,17 @@
-FROM gradle:9.3.1-jdk25 AS builder
-COPY . /java
-WORKDIR /java
-RUN ./gradlew :spotlessApply && ./gradlew build --no-daemon
+FROM gradle:9.3.1-jdk25 AS dependencies
+WORKDIR /app
+COPY . .
+RUN ./gradlew dependencies --no-daemon
 
-FROM dhi.io/sapmachine:25-jdk-debian13-dev
-COPY --from=builder /java/build/libs/*.jar /demo-0.0.1-SNAPSHOT.jar
+FROM dependencies AS builder
+WORKDIR /app
+COPY src/main ./src/main
+COPY src/main/resources ./src/main/resources
+RUN ./gradlew bootJar --no-daemon
+
+FROM eclipse-temurin:25-jre-alpine
+WORKDIR /app
+COPY --from=builder /app/build/libs/*.jar app.jar
 EXPOSE 8080
 ENV SPRING_PROFILES_ACTIVE=docker
-CMD [ "java", "-jar", "/demo-0.0.1-SNAPSHOT.jar" ]
+CMD [ "java", "-jar", "app.jar" ]
