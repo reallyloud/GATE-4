@@ -56,6 +56,9 @@ jobs:
           java-version: '25'
           distribution: 'temurin'
 
+      - name: Make gradlew executable
+        run: chmod +x gradlew
+
       - name: Build JAR file
         run: ./gradlew bootJar
 
