@@ -5,4 +5,4 @@
 
 ## GitHub Container Registry URL
 
-ghcr.io/[reallyloud]/mcloud-core:latest
+ghcr.io/[reallyloud]/gate-4:latest

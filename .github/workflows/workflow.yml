@@ -78,6 +78,6 @@ jobs:
           context: .
           push: true
           tags: |
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest # Аргументы для build
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }} # Аргументы для push
 
