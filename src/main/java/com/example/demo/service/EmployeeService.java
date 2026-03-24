@@ -5,7 +5,6 @@ import com.example.demo.dto.ResponseEmployee;
 import com.example.demo.entity.Employee;
 import com.example.demo.mapper.EmployeeMapper;
 import com.example.demo.repository.EmployeeRepository;
-
 import java.util.List;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
@@ -32,9 +31,7 @@ public class EmployeeService {
     if (employees.isEmpty()) {
       return null;
     }
-    return employees.stream()
-            .map(mapper::toResponse)
-            .toList();
+    return employees.stream().map(mapper::toResponse).toList();
   }
 
   @Transactional
