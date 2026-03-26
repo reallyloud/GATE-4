@@ -1,9 +1,8 @@
 spring:
   datasource:
-    application: name=demo
-    url: jdbc:postgresql://localhost:5432/employeeCrm
-    username: postgres
-    password: 6881
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
     driver-class-name: org.postgresql.Driver
 
   jpa:
@@ -25,10 +24,9 @@ spring:
   config:
     activate:
       on-profile: docker
-
   datasource:
-    url: jdbc:postgresql://host.docker.internal:5432/employeeCrm
-    username: postgres
-    password: 6881
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
     driver-class-name: org.postgresql.Driver
 
