@@ -1,6 +1,6 @@
 package factory;
 
 public enum PeopleType {
-    Employee,
-    Director
+  Employee,
+  Director
 }
