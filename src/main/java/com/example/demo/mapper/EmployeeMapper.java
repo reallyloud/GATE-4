@@ -2,6 +2,7 @@ package com.example.demo.mapper;
 
 import com.example.demo.dto.RequestEmployee;
 import com.example.demo.dto.ResponseEmployee;
+import com.example.demo.dto.SalaryRequestEmployee;
 import com.example.demo.entity.Employee;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -12,6 +13,10 @@ public interface EmployeeMapper {
 
   @Mapping(target = "id", ignore = true)
   Employee toEntity(RequestEmployee requestEmployee);
+
+  Employee toEntity(ResponseEmployee responseEmployee);
+
+  SalaryRequestEmployee toSalaryRequestEmployee(Employee employee);
 
   ResponseEmployee toResponse(Employee employee);
 

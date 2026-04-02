@@ -2,7 +2,9 @@ package com.example.demo.service;
 
 import com.example.demo.dto.RequestEmployee;
 import com.example.demo.dto.ResponseEmployee;
+import com.example.demo.dto.SalaryRequestEmployee;
 import com.example.demo.entity.Employee;
+import com.example.demo.feign.SalaryManagerFeignClient;
 import com.example.demo.mapper.EmployeeMapper;
 import com.example.demo.repository.EmployeeRepository;
 import java.util.List;
@@ -17,12 +19,30 @@ public class EmployeeService {
 
   private final EmployeeMapper mapper;
   private final EmployeeRepository repository;
+  private final SalaryManagerFeignClient salaryManager;
 
   @Transactional
   public ResponseEmployee createEmployee(RequestEmployee request) {
     Employee employee = mapper.toEntity(request);
     employee = repository.save(employee);
     return mapper.toResponse(employee);
+  }
+
+  @Transactional
+  public ResponseEmployee multiplyEmployeeSalary(UUID id) {
+    if (repository.findById(id).isPresent()) {
+      Employee employee = repository.findById(id).get();
+      SalaryRequestEmployee request = mapper.toSalaryRequestEmployee(employee);
+      ResponseEmployee response = salaryManager.multiplySalary(request);
+
+      employee.setSalary(response.salary());
+      employee.setName(response.name());
+      employee.setId(response.id());
+      repository.save(employee);
+
+      return response;
+    }
+    return null;
   }
 
   @Transactional
