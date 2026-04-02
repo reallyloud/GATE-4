@@ -51,4 +51,10 @@ public class EmployeeController {
     ResponseEmployee response = service.update(id, request);
     return ResponseEntity.ok(response);
   }
+
+  @PatchMapping("/{id}/multiplySalary")
+  @ResponseStatus(HttpStatus.OK)
+  public ResponseEmployee multiplySalary(@PathVariable UUID id) {
+    return service.multiplyEmployeeSalary(id);
+  }
 }
