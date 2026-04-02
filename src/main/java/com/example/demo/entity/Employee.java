@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import factory.People;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.util.UUID;
@@ -10,7 +11,7 @@ import lombok.*;
 @Table(name = "employees")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Employee {
+public class Employee implements People {
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
   private UUID id;
